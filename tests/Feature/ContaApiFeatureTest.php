@@ -22,42 +22,28 @@ class ContaApiFeatureTest extends TestCase
         ]);
 
         $response
-            ->assertStatus(200)
+            ->assertStatus(201)
             ->assertJsonStructure([
-                'data' => [
-                    'id',
                     'numero_conta',
                     'saldo',
-                    'created_at',
-                    'updated_at',
-                    'deleted_at',
-                ]
             ]);
 
     }
 
-//    /**
-//     * Teste do método buscar conta da API de conta
-//     */
-//    public function testGetAccountByIdApi()
-//    {
-//        $response = $this->get(route('api.accounts.show',1));
-//
-//        $response
-//            ->assertStatus(200)
-//            ->assertJsonStructure([
-//                'data' => [
-//                    'id',
-//                    'fullname',
-//                    'email',
-//                    'created_at',
-//                    'updated_at',
-//                    'deleted_at',
-//                    'wallet',
-//                    'shops'
-//                ]
-//            ]);
-//
-//    }
+    /**
+     * Teste do método buscar conta da API de conta
+     */
+    public function testVisualizarContaPorNumeroApi()
+    {
+        $response = $this->get(route('conta.visualizar',['numero_conta' => 999]));
+
+        $response
+            ->assertStatus(200)
+            ->assertJsonStructure([
+                    'numero_conta',
+                    'saldo',
+            ]);
+
+    }
 
 }

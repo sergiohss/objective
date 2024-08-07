@@ -8,7 +8,7 @@ use App\Models\Conta;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 
-class ContaStoreRequest extends FormRequest
+class ContaSalvarRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class ContaStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            Conta::NUMERO => 'required',
+            Conta::NUMERO => 'required|unique:'.Conta::TABELA.','.Conta::NUMERO,
             Conta::SALDO => 'required|numeric|between:0,999999999.99',
         ];
     }

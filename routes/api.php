@@ -20,6 +20,7 @@ use App\Http\Controllers\ContaController;
 Route::prefix('conta')->group(function () {
     Route::controller(ContaController::class)->group(function () {
         Route::post('/', 'criar')->name('conta.criar');
+        Route::get('/', 'visualizar')->name('conta.visualizar');
     });
 });
 
