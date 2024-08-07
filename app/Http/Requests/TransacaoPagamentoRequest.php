@@ -4,11 +4,11 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Conta;
+use App\Models\Transacao;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 
-class ContaSalvarRequest extends FormRequest
+class TransacaoPagamentoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +26,9 @@ class ContaSalvarRequest extends FormRequest
     public function rules()
     {
         return [
-            Conta::NUMERO => 'required|numerir|unique:'.Conta::TABELA.','.Conta::NUMERO,
-            Conta::SALDO => 'required|numeric|between:0,999999999.99',
+            Transacao::NUMERO_CONTA => 'required|numeric',
+            Transacao::VALOR => 'required|numeric|between:0,999999999.99',
+            Transacao::FORMA_PAGAMENTO => 'required',
         ];
     }
 
@@ -39,12 +40,12 @@ class ContaSalvarRequest extends FormRequest
     public function messages()
     {
         return [
-            Conta::NUMERO.'.required' => 'O campo Numero da Conta e obrigatorio',
-            Conta::NUMERO.'.numeric' => 'O campo Numero da conta deve ser do tipo numero',
-            Conta::NUMERO.'.unique' => 'Ja existe uma conta com esse numero',
-            Conta::SALDO.'.required' => 'O campo Saldo da Conta e obrigatorio',
-            Conta::SALDO.'.numeric' => 'O campo Saldo da Conta precisa ser um numero',
-            Conta::SALDO.'.between' => 'O campo Saldo da Conta deve estar com valor entre 0 e 999999999.99',
+            Transacao::NUMERO_CONTA.'.required' => 'O campo Numero da Conta e obrigatorio',
+            Transacao::NUMERO_CONTA.'.numeric' => 'O campo Numero da Conta deve ser to tipo numero',
+            Transacao::VALOR.'.required' => 'O campo valor e obrigatorio',
+            Transacao::VALOR.'.numeric' => 'O campo valor deve ser do tipo numero',
+            Transacao::VALOR.'.between' => 'O campo valor deve estar com valor entre 0 e 999999999.99',
+            Transacao::FORMA_PAGAMENTO.'.required' => 'O campo forma de pagamento e obrigatorio',
         ];
     }
 

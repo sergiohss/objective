@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Models\Conta;
 use App\Repositories\ContaRespository;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Collection;
+
 /**
  * Class ContaService
  * @package App\Services

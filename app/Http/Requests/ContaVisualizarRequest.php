@@ -26,7 +26,7 @@ class ContaVisualizarRequest extends FormRequest
     public function rules()
     {
         return [
-            Conta::NUMERO => 'required',
+            Conta::NUMERO => 'required|numeric',
         ];
     }
 
@@ -39,6 +39,7 @@ class ContaVisualizarRequest extends FormRequest
     {
         return [
             Conta::NUMERO.'.required' => 'O campo Numero da Conta e obrigatorio',
+            Conta::NUMERO.'.numeric' => 'O campo Numero da conta deve ser do tipo numero',
         ];
     }
 

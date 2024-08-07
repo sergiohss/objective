@@ -49,7 +49,11 @@ class ContaRespository
         if($numero_conta){
             $this->conta = $this->obterPorNumeroConta($numero_conta);
         }
-        $this->conta->fill($data)->save();
+
+        if(!$this->conta->fill($data)->save()){
+            throw new \Exception('Ocoreu um erro ao salvar a conta');
+        }
+
         return $this->conta;
     }
 }
