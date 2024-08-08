@@ -26,7 +26,7 @@ class ContaSalvarRequest extends FormRequest
     public function rules()
     {
         return [
-            Conta::NUMERO => 'required|numerir|unique:'.Conta::TABELA.','.Conta::NUMERO,
+            Conta::NUMERO => 'required|numeric|unique:'.Conta::TABELA.','.Conta::NUMERO,
             Conta::SALDO => 'required|numeric|between:0,999999999.99',
         ];
     }

@@ -27,12 +27,12 @@ class ContaRespository
      * @return Model
      * @throws NotFoundException
      */
-    public function obterPorNumeroConta(int $numero_conta):Model
+    public function obterPorNumeroConta(int $numero_conta)
     {
         $conta = $this->conta->where(Conta::NUMERO, $numero_conta)->first();
 
-        if(!$this->conta instanceof Conta){
-            throw new NotFoundException('Conta não encontrada');
+        if(!$conta instanceof Conta){
+            throw new NotFoundException('Conta nao encontrada');
         }
 
         return $conta;
@@ -44,7 +44,7 @@ class ContaRespository
      * @return Model
      * @throws NotFoundException
      */
-    public function salvar(array $data, int $numero_conta = null):Model
+    public function salvar(array $data, int $numero_conta = null)
     {
         if($numero_conta){
             $this->conta = $this->obterPorNumeroConta($numero_conta);

@@ -17,7 +17,7 @@ class TransacaoApiFeatureTest extends TestCase
     public function testCriarTransacaoPorApi()
     {
         $response = $this->post(route('transacao.pagamento'),[
-            'numero_conta' => '555',
+            'numero_conta' => '999',
             "valor" => 100,
             "forma_pagamento" => 'D'
         ]);

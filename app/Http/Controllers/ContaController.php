@@ -2,50 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\HTTPStatus;
+
 use App\Exceptions\NotFoundException;
 use App\Http\Requests\ContaSalvarRequest;
 use App\Http\Requests\ContaVisualizarRequest;
 use App\Services\ContaService;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\ValidationException;
+use Illuminate\Routing\Controller;
+
+
 
 /**
- * Class ContaController
- * @package App\Http\Controllers
+ * @OA\Info(
+ *      version="1.0.0",
+ *      title="Objective API",
+ *      description="",
+ *      @OA\Contact(
+ *          email="sergio.hss@hotmail.com"
+ *      ),
+ * )
+ *
+ * @OA\Server(
+ *      url="http://localhost:9191",
+ *      description="API Server"
+ * )
+ *
+ *
+ * @OA\Tag(
+ *     name="Contas",
+ *     description="API Endpoints de Contas"
+ * )
  */
+
+
 class ContaController extends Controller
 {
 
-    /**
-     * @OA\Info(
-     *      version="1.0.0",
-     *      title="Objective API",
-     *      description="",
-     *      @OA\Contact(
-     *          email="sergio.hss@hotmail.com"
-     *      ),
-     *      @OA\License(
-     *          name="Apache 2.0",
-     *          url="http://www.apache.org/licenses/LICENSE-2.0.html"
-     *      )
-     * )
-     *
-     * @OA\Server(
-     *      url="http://localhost:9191",
-     *      description="API Server"
-     * )
-
-     *
-     * @OA\Tag(
-     *     name="Contas",
-     *     description="API Endpoints de Contas"
-     * )
-     */
 
     /**
      * @var ContaService
@@ -75,15 +69,20 @@ class ContaController extends Controller
      *           mediaType="application/json",
      *           @OA\Schema(
      *                 @OA\Property(
-     *                     property="numero_conta",
-     *                     type="int",
-     *                     example="234"
-     *                  ),
-     *                  @OA\Property(
-     *                     property="saldo",
-     *                     type="float",
-     *                     example="180.37"
-     *                  ),
+     *                      type="object",
+     *                      @OA\Property(
+     *                          property="numero_conta",
+     *                          type="int"
+     *                      ),
+     *                      @OA\Property(
+     *                          property="saldo",
+     *                          type="float"
+     *                      )
+     *                 ),
+     *                 example={
+     *                     "numero_conta":"234",
+     *                     "saldo":"180.37"
+     *                }
      *           )
      *       )
      *   ),
@@ -91,11 +90,6 @@ class ContaController extends Controller
      *   @OA\Response(response=404, description="Registro não encontrado."),
      *   @OA\Response(response=500, description="Servidor não pode atender à solicitação.")
      * )
-     */
-
-    /**
-     * @param ContaSalvarRequest $request
-     * @return JsonResponse
      */
     public function criar(ContaSalvarRequest $request)
     {
@@ -144,10 +138,15 @@ class ContaController extends Controller
      *           mediaType="application/json",
      *           @OA\Schema(
      *                 @OA\Property(
-     *                     property="numero_conta",
-     *                     type="int",
-     *                     example="234"
-     *                  ),
+     *                      type="object",
+     *                      @OA\Property(
+     *                          property="numero_conta",
+     *                          type="int"
+     *                      ),
+     *                 ),
+     *                 example={
+     *                     "numero_conta":"234",
+     *                }
      *           )
      *       )
      *   ),
@@ -155,11 +154,6 @@ class ContaController extends Controller
      *   @OA\Response(response=404, description="Registro não encontrado."),
      *   @OA\Response(response=500, description="Servidor não pode atender à solicitação.")
      * )
-     */
-
-    /**
-     * @param ContaVisualizarRequest $request
-     * @return JsonResponse
      */
     public function visualizar(ContaVisualizarRequest $request)
     {

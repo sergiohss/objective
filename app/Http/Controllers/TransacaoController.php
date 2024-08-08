@@ -4,20 +4,17 @@ namespace App\Http\Controllers;
 
 
 use App\Exceptions\NotFoundException;
-use App\Http\Requests\ContaSalvarRequest;
+use App\Http\Requests\TransacaoPagamentoRequest;
 use App\Services\TransacaoService;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Routing\Controller;
 
 
-/**
- * Class ContaController
- * @package App\Http\Controllers
- */
+
 class TransacaoController extends Controller
 {
-
 
     /**
      * @var TransacaoService
@@ -47,20 +44,25 @@ class TransacaoController extends Controller
      *           mediaType="application/json",
      *           @OA\Schema(
      *                 @OA\Property(
-     *                     property="forma_pagamento",
-     *                     type="enum",
-     *                     example="D"
-     *                  ),
-     *                 @OA\Property(
-     *                     property="numero_conta",
-     *                     type="int",
-     *                     example="234"
-     *                  ),
-     *                  @OA\Property(
-     *                     property="valor",
-     *                     type="float",
-     *                     example="10"
-     *                  ),
+     *                      type="object",
+     *                      @OA\Property(
+     *                          property="forma_pagamento",
+     *                          type="enum"
+     *                      ),
+     *                      @OA\Property(
+     *                          property="numero_conta",
+     *                          type="int"
+     *                      ),
+     *                      @OA\Property(
+     *                          property="valor",
+     *                          type="float"
+     *                      )
+     *                 ),
+     *                 example={
+     *                     "forma_pagamento":"D",
+     *                     "numero_conta":"234",
+     *                     "saldo":"180.37"
+     *                }
      *           )
      *       )
      *   ),
@@ -69,12 +71,7 @@ class TransacaoController extends Controller
      *   @OA\Response(response=500, description="Servidor não pode atender à solicitação.")
      * )
      */
-
-    /**
-     * @param ContaSalvarRequest $request
-     * @return JsonResponse
-     */
-    public function pagamento(ContaSalvarRequest $request)
+    public function pagamento(TransacaoPagamentoRequest $request)
     {
         try {
             DB::beginTransaction();

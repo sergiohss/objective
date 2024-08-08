@@ -16,9 +16,6 @@ return new class extends Migration
         Schema::create(Transacao::TABELA, function (Blueprint $table) {
             $table->id();
             $table->bigInteger(Transacao::NUMERO_CONTA)->unsigned();
-            $table->foreign(Transacao::NUMERO_CONTA, 'fk_transacao_numero_conta')
-                ->references(Conta::NUMERO)->on(Conta::TABELA)
-                ->onDelete('RESTRICT');
             $table->float(Transacao::VALOR);
             $table->float(Transacao::VALOR_TAXA);
             $table->float(Transacao::VALOR_TOTAL);

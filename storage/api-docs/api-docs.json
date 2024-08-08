@@ -1,0 +1,176 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Objective API",
+        "description": "",
+        "contact": {
+            "email": "sergio.hss@hotmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:9191",
+            "description": "API Server"
+        }
+    ],
+    "paths": {
+        "/api/conta": {
+            "get": {
+                "tags": [
+                    "Conta"
+                ],
+                "summary": "Visualizar conta",
+                "description": "Retorna dados da conta",
+                "operationId": "BuscarContaPorNumero",
+                "requestBody": {
+                    "description": "Body Params",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "numero_conta": {
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "numero_conta": "234"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Busca realizada com sucesso."
+                    },
+                    "404": {
+                        "description": "Registro não encontrado."
+                    },
+                    "500": {
+                        "description": "Servidor não pode atender à solicitação."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Conta"
+                ],
+                "summary": "Criar nova conta",
+                "description": "Retorna dados conta",
+                "operationId": "CriarConta",
+                "requestBody": {
+                    "description": "Body Params",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "numero_conta": {
+                                                "type": "integer"
+                                            },
+                                            "saldo": {
+                                                "type": "number",
+                                                "format": "float"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "numero_conta": "234",
+                                    "saldo": "180.37"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Operação realizada com sucesso."
+                    },
+                    "404": {
+                        "description": "Registro não encontrado."
+                    },
+                    "500": {
+                        "description": "Servidor não pode atender à solicitação."
+                    }
+                }
+            }
+        },
+        "/api/transacao": {
+            "post": {
+                "tags": [
+                    "Transacao"
+                ],
+                "summary": "Realizar pagamento",
+                "description": "Realiza pagamento e retorna novo saldo da conta",
+                "operationId": "FazerPagamento",
+                "requestBody": {
+                    "description": "Body Params",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "forma_pagamento": {
+                                                "type": "enum"
+                                            },
+                                            "numero_conta": {
+                                                "type": "integer"
+                                            },
+                                            "valor": {
+                                                "type": "number",
+                                                "format": "float"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "forma_pagamento": "D",
+                                    "numero_conta": "234",
+                                    "saldo": "180.37"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Operação realizada com sucesso."
+                    },
+                    "404": {
+                        "description": "A conta não possui saldo disponivel."
+                    },
+                    "500": {
+                        "description": "Servidor não pode atender à solicitação."
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Conta",
+            "description": "Conta"
+        },
+        {
+            "name": "Transacao",
+            "description": "Transacao"
+        }
+    ]
+}

@@ -109,9 +109,8 @@ class TransacaoService
                 'forma_pagamento' => $this->forma_pagamento
             ]);
 
-
             $this->contaService->salvar([
-                "saldo" => $this->conta - $this->valor_total
+                "saldo" => (float) $this->conta->saldo - $this->valor_total
             ], data_get($requestData, Conta::NUMERO));
 
             DB::commit();
